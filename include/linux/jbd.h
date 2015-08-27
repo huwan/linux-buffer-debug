@@ -246,7 +246,7 @@ typedef struct journal_superblock_s
 
 #define J_ASSERT(assert)	BUG_ON(!(assert))
 
-#if defined(CONFIG_BUFFER_DEBUG)
+#if defined(CONFIG_BUFFER_DEBUG2)
 void buffer_assertion_failure(struct buffer_head *bh);
 #define J_ASSERT_BH(bh, expr)						\
 	do {								\
