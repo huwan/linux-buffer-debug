@@ -19,6 +19,10 @@ config FS_XIP
 source "fs/jbd/Kconfig"
 source "fs/jbd2/Kconfig"
 
+config BUFFER_DEBUG
+	bool "buffer-layer tracing"
+	depends on JBD2
+
 config FS_MBCACHE
 # Meta block cache for Extended Attributes (ext2/ext3/ext4)
 	tristate

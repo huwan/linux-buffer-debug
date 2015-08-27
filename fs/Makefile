@@ -36,6 +36,7 @@ obj-y				+= $(nfsd-y) $(nfsd-m)
 obj-$(CONFIG_BINFMT_AOUT)	+= binfmt_aout.o
 obj-$(CONFIG_BINFMT_EM86)	+= binfmt_em86.o
 obj-$(CONFIG_BINFMT_MISC)	+= binfmt_misc.o
+obj-$(CONFIG_BUFFER_DEBUG)	+= jbd2-kernel.o
 
 # binfmt_script is always there
 obj-y				+= binfmt_script.o
