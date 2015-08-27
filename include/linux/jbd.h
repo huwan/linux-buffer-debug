@@ -1094,12 +1094,12 @@ extern int jbd_blocks_per_page(struct inode *inode);
 
 #ifdef __KERNEL__
 
-#define buffer_trace_init(bh)	do {} while (0)
-#define print_buffer_fields(bh)	do {} while (0)
-#define print_buffer_trace(bh)	do {} while (0)
-#define BUFFER_TRACE(bh, info)	do {} while (0)
-#define BUFFER_TRACE2(bh, bh2, info)	do {} while (0)
-#define JBUFFER_TRACE(jh, info)	do {} while (0)
+/* #define buffer_trace_init(bh)	do {} while (0) */
+/* #define print_buffer_fields(bh)	do {} while (0) */
+/* #define print_buffer_trace(bh)	do {} while (0) */
+/* #define BUFFER_TRACE(bh, info)	do {} while (0) */
+/* #define BUFFER_TRACE2(bh, bh2, info)	do {} while (0) */
+/* #define JBUFFER_TRACE(jh, info)	do {} while (0) */
 
 #endif	/* __KERNEL__ */
 
