@@ -13,7 +13,6 @@
 #include <linux/pagemap.h>
 #include <linux/wait.h>
 #include <asm/atomic.h>
-#include <linux/buffer-trace.h>
 
 #ifdef CONFIG_BLOCK
 
@@ -70,14 +69,11 @@ struct buffer_head {
 
 	struct block_device *b_bdev;
 	bh_end_io_t *b_end_io;		/* I/O completion */
-	void *b_private;		/* reserved for b_end_io */
+ 	void *b_private;		/* reserved for b_end_io */
 	struct list_head b_assoc_buffers; /* associated with another mapping */
 	struct address_space *b_assoc_map;	/* mapping this buffer is
 						   associated with */
 	atomic_t b_count;		/* users using this buffer_head */
-	#ifdef CONFIG_BUFFER_DEBUG
-	struct buffer_history b_history;
-	#endif
 };
 
 /*
