@@ -296,6 +296,7 @@ void buffer_assertion_failure(struct buffer_head *bh);
 #else
 #define J_ASSERT_BH(bh, expr)	J_ASSERT(expr)
 #define J_ASSERT_JH(jh, expr)	J_ASSERT(expr)
+#define buffer_assertion_failure(bh) do { } while (0)
 #endif
 
 #if defined(JBD2_PARANOID_IOFAIL)
@@ -1296,12 +1297,41 @@ extern int jbd_blocks_per_page(struct inode *inode);
 
 #ifdef __KERNEL__
 
+#ifdef CONFIG_BUFFER_DEBUG
+
+static inline void buffer_trace_init(struct buffer_history *bhist)
+{
+	bhist->b_history_head = 0;
+	bhist->b_history_tail = 0;
+}
+extern void buffer_trace(const char *function, struct buffer_head *dest,
+	struct buffer_head *src, char *info);
+extern void print_buffer_fields(struct buffer_head *bh);
+extern void print_buffer_trace(struct buffer_head *bh);
+
+#define BUFFER_STRINGIFY2(X)	#X
+#define BUFFER_STRINGIFY(X)	BUFFER_STRINGIFY2(X)
+
+#define BUFFER_TRACE2(dest, src, info)	\
+	do {	\
+	buffer_trace(__FUNCTION__, (dest), (src),	\
+	"["__FILE__":"	\
+	BUFFER_STRINGIFY(__LINE__)"] " info);	\
+	} while (0)
+
+#define BUFFER_TRACE(bh, info) BUFFER_TRACE2(bh, bh, info)
+#define JBUFFER_TRACE(jh, info)	BUFFER_TRACE(jh2bh(jh), info)
+
+#else	/* CONFIG_BUFFER_DEBUG */
+
 #define buffer_trace_init(bh)	do {} while (0)
 #define print_buffer_fields(bh)	do {} while (0)
 #define print_buffer_trace(bh)	do {} while (0)
 #define BUFFER_TRACE(bh, info)	do {} while (0)
 #define BUFFER_TRACE2(bh, bh2, info)	do {} while (0)
 #define JBUFFER_TRACE(jh, info)	do {} while (0)
+
+#endif	/* CONFIG_BUFFER_DEBUG */
 
 /* 
  * jbd2_dev_to_name is a utility function used by the jbd2 and ext4 
