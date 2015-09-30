@@ -17,3 +17,5 @@ CONFIG_BUFFER_DEBUG=y
 ```
 
 You can also find ext3 buffer debug patch from [HERE](http://lkml.iu.edu/hypermail/linux/kernel/0609.0/1543.html).
+
+Related patch for jbd and jbd2: https://gist.github.com/huwan/b03a16c49e61b69cfa67.
